@@ -138,6 +138,19 @@ export function runScene(canvas: HTMLCanvasElement, state: SimulationState, opti
   const orbitLine = new THREE.Line(orbitGeo, orbitMat);
   scene.add(orbitLine);
 
+  // 1 AU reference circle (radius = 1). Same plane as orbit and HZ disks (XZ, y=0).
+  const oneAuSegments = 64;
+  const oneAuPoints: THREE.Vector3[] = [];
+  for (let i = 0; i < oneAuSegments; i++) {
+    const t = (i / oneAuSegments) * 2 * Math.PI;
+    oneAuPoints.push(new THREE.Vector3(Math.cos(t), 0, Math.sin(t)));
+  }
+  const oneAuGeo = new THREE.BufferGeometry().setFromPoints(oneAuPoints);
+  const oneAuMat = new THREE.LineDashedMaterial({ color: 0xaaaaaa, dashSize: 0.08, gapSize: 0.05 });
+  const oneAuCircle = new THREE.LineLoop(oneAuGeo, oneAuMat);
+  oneAuCircle.computeLineDistances();
+  scene.add(oneAuCircle);
+
   const planetGeo = new THREE.SphereGeometry(state.planetRadius, 16, 16);
   const planetMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
   const planet = new THREE.Mesh(planetGeo, planetMat);

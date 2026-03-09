@@ -224,42 +224,6 @@ import { runScene } from "./scene.js";
 
   const state = createSimulationFromRow(row);
 
-  function updateScaleBar(maxAu: number): void {
-    const NICE = [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10];
-    const maxVal = NICE.find((n) => n >= maxAu * 1.05) ?? NICE[NICE.length - 1];
-    const step = maxVal / 5;
-    const niceStep = NICE.find((n) => n >= step) ?? NICE[NICE.length - 1];
-    const ticks: number[] = [0];
-    for (let v = niceStep; v < maxVal - 1e-9; v += niceStep) ticks.push(v);
-    if (ticks[ticks.length - 1] !== maxVal) ticks.push(maxVal);
-    const formatAu = (v: number) =>
-      v >= 1 ? (v % 1 === 0 ? v.toFixed(0) : v.toFixed(1)) : v >= 0.1 ? v.toFixed(1) : v.toFixed(2);
-    const w = 200;
-    const h = 44;
-    const lineY = 10;
-    const tickY2 = 18;
-    const labelY = 32;
-    let tickLines = "";
-    let labels = "";
-    ticks.forEach((v, i) => {
-      const x = maxVal > 0 ? (v / maxVal) * w : 0;
-      tickLines += `<line x1="${x}" y1="${lineY}" x2="${x}" y2="${tickY2}"/>`;
-      const anchor = i === 0 ? "start" : i === ticks.length - 1 ? "end" : "middle";
-      labels += `<text x="${x}" y="${labelY}" text-anchor="${anchor}">${formatAu(v)}</text>`;
-    });
-    const scaleEl = document.getElementById("scale");
-    const scaleBar = scaleEl?.querySelector("#scale-bar") ?? document.getElementById("scale-bar");
-    if (scaleBar) {
-      scaleBar.innerHTML =
-        `<line x1="0" y1="${lineY}" x2="${w}" y2="${lineY}" stroke="#fff" stroke-width="2"/>` +
-        tickLines +
-        labels;
-    }
-  }
-
-  const maxDist = Math.max(state.hzOuter, state.orbitRadius);
-  updateScaleBar(maxDist);
-
   function fmt(x: number | null, decimals: number): string {
     return x != null ? x.toFixed(decimals) : "—";
   }

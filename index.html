@@ -15,17 +15,10 @@
     #info .hz.out-too-far { color: #6a9aee; }
     #info button { display: block; margin: 8px 0 0 0; cursor: pointer; background: #4488ff; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; font-size: 14px; }
     #info button:hover { background: #5599ff; }
-    #temp-legend, #scale { width: 228px; box-sizing: border-box; position: absolute; right: max(10px, env(safe-area-inset-right)); color: #fff; background: rgba(0,0,0,0.6); padding: 10px 14px; font-family: sans-serif; font-size: 12px; z-index: 2; overflow: visible; }
-    #temp-legend { bottom: 92px; }
+    #temp-legend { width: 228px; box-sizing: border-box; position: absolute; right: max(10px, env(safe-area-inset-right)); bottom: max(10px, env(safe-area-inset-bottom)); color: #fff; background: rgba(0,0,0,0.6); padding: 10px 14px; font-family: sans-serif; font-size: 12px; z-index: 2; overflow: visible; }
     #temp-legend .title { font-weight: bold; margin-bottom: 4px; font-size: 12px; }
     #temp-legend text { fill: #fff; font-size: 10px; }
     #temp-legend svg { display: block; width: 200px; height: auto; }
-    #scale-bar { display: block; width: 200px; }
-    #scale { bottom: max(10px, env(safe-area-inset-bottom)); font-size: 14px; }
-    #scale .title { font-weight: bold; margin-bottom: 4px; font-size: 12px; }
-    #scale-bar { vertical-align: bottom; }
-    #scale-bar line { stroke: #fff; stroke-width: 1.5; }
-    #scale-bar text { fill: #fff; font-size: 12px; font-weight: bold; }
     #timer { position: absolute; left: 10px; bottom: 10px; color: #fff; background: rgba(0,0,0,0.6); padding: 10px 14px; font-family: sans-serif; font-size: 20px; z-index: 2; }
     #disclaimer-btn { position: absolute; right: 10px; top: 10px; color: #fff; background: rgba(0,0,0,0.6); border: 1px solid #888; padding: 8px 12px; font-family: sans-serif; font-size: 14px; cursor: pointer; z-index: 2; }
     #disclaimer-btn:hover { background: rgba(0,0,0,0.8); }
@@ -69,6 +62,7 @@
       <li><strong>Orbit:</strong> Eccentricity from the database when available; otherwise circular. Single planet only; no mutual perturbations.</li>
       <li><strong>Habitable zone:</strong> From stellar luminosity only (inner ≈ 0.75√L, outer ≈ 1.77√L AU). Simplified model; not climate or atmosphere.</li>
       <li><strong>Star/planet size:</strong> Exaggerated for visibility. Real star/planet radii are much smaller than orbit scale.</li>
+      <li><strong>Scale:</strong> The dashed gray circle marks <strong>1 AU</strong> from the star (Earth–Sun distance).</li>
       <li><strong>Time:</strong> Orbital period from database (days). "Years" = days / 365.25. Animation speed is arbitrary.</li>
       <li>Data: NASA Exoplanet Archive (TAP). Any errors come directly from here.</li>
     </ul>
@@ -90,23 +84,6 @@
       <text x="0" y="24" text-anchor="start">2.5k</text>
       <text x="100" y="24" text-anchor="middle">~6k</text>
       <text x="200" y="24" text-anchor="end">25k</text>
-    </svg>
-  </div>
-  <div id="scale" aria-label="Distance scale in AU">
-    <div class="title">Distance (AU)</div>
-    <svg id="scale-bar" width="200" height="44" viewBox="0 0 200 44" aria-hidden="true">
-      <!-- horizontal bar -->
-      <line x1="0" y1="10" x2="200" y2="10" stroke="#fff" stroke-width="2"/>
-      <!-- major ticks (0, 0.5, 1, 1.5, 2) -->
-      <line x1="0" y1="10" x2="0" y2="18"/><line x1="50" y1="10" x2="50" y2="18"/>
-      <line x1="100" y1="10" x2="100" y2="18"/><line x1="150" y1="10" x2="150" y2="18"/>
-      <line x1="200" y1="10" x2="200" y2="18"/>
-      <!-- labels -->
-      <text x="0" y="32" text-anchor="start">0</text>
-      <text x="50" y="32" text-anchor="middle">0.5</text>
-      <text x="100" y="32" text-anchor="middle">1</text>
-      <text x="150" y="32" text-anchor="middle">1.5</text>
-      <text x="200" y="32" text-anchor="end">2</text>
     </svg>
   </div>
   <canvas id="canvas"></canvas>

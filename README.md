@@ -34,7 +34,7 @@ We query the **NASA Exoplanet Archive** TAP API (`ps` table, default composite r
 | **st_mass** | Star mass (M☉) | Derive semi-major axis from period when needed; info panel. |
 | **pl_rade** | Planet radius (Earth radii) | Planet size in scene; info panel. |
 | **pl_masse** | Planet mass (Earth masses) | Info panel only. | 
-| **pl_orbsmax** | Orbital semi-major axis (AU) | Orbit size, HZ in/out check, scale bar. Validated against period (Kepler III). |
+| **pl_orbsmax** | Orbital semi-major axis (AU) | Orbit size, HZ in/out check. Validated against period (Kepler III). |
 | **pl_orbper** | Orbital period (days) | Orbit animation speed; period display; derive semi-major axis when missing or inconsistent. |
 | **pl_orbeccen** | Orbital eccentricity (0–1) | Elliptical orbit shape; “unknown” if null. |
 | **pl_orbincl** | Orbital inclination (deg) | Queried; reserved for future use. |
