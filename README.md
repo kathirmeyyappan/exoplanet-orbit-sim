@@ -2,11 +2,13 @@
 
 Created as a part of BPRO 28800 final project.
 
+Details about connections to the course content are in our final project write-up, which can be found [here](https://www.notion.so/kathirm/BPRO-28800-Final-Project-Writeup-31e9871cd3ff80988cd3fde8557ced24?source=copy_link).
+
 3D orbit viz with habitable-zone (Goldilocks) display. Pick a planet and see its orbit and whether it sits inside the star’s habitable zone. Static site (TypeScript → `dist/`); runs in the browser, no backend. See **[docs/setup.md](docs/setup.md)** for local running instructions.
 
-**Ways to pick a planet:** 
+**Ways to pick a planet:**
 
-- **Examples** — preloaded list (solar system + a few exoplanets) in `preloaded-planets.json`; instant, no API. 
+- **Examples** — preloaded list (solar system + a few exoplanets) in `preloaded-planets.json`; instant, no API.
 - **Suggestions** — preset categories that query the NASA Exoplanet Archive. (
 - **Search** — custom filters against the archive. All requests go through a CORS proxy so the app works when deployed (e.g. GitHub Pages). Successful API results are cached in memory.
 
@@ -33,7 +35,7 @@ We query the **NASA Exoplanet Archive** TAP API (`ps` table, default composite r
 | **st_lum** | log₁₀(L/L☉) | Convert to L/L☉; habitable zone inner/outer (AU). |
 | **st_mass** | Star mass (M☉) | Derive semi-major axis from period when needed; info panel. |
 | **pl_rade** | Planet radius (Earth radii) | Planet size in scene; info panel. |
-| **pl_masse** | Planet mass (Earth masses) | Info panel only. | 
+| **pl_masse** | Planet mass (Earth masses) | Info panel only. |
 | **pl_orbsmax** | Orbital semi-major axis (AU) | Orbit size, HZ in/out check. Validated against period (Kepler III). |
 | **pl_orbper** | Orbital period (days) | Orbit animation speed; period display; derive semi-major axis when missing or inconsistent. |
 | **pl_orbeccen** | Orbital eccentricity (0–1) | Elliptical orbit shape; “unknown” if null. |
@@ -51,8 +53,8 @@ Search filters use the same physical quantities: we send min/max for `st_rad`, `
 
 - **Luminosity:** `L/L☉ = 10^st_lum` (archive gives log₁₀(L/L☉)).
 - **HZ bounds (AU):** Flux ∝ L/d² so distance ∝ √L. Inner and outer:
-  - *d_inner* = 0.75 × √(L/L☉) AU  
-  - *d_outer* = 1.77 × √(L/L☉) AU  
+  - *d_inner* = 0.75 × √(L/L☉) AU
+  - *d_outer* = 1.77 × √(L/L☉) AU
   If `st_lum` is missing we use 0.75–1.77 AU (Sun-like).
 
 ### 2. Semi-major axis when missing or inconsistent
