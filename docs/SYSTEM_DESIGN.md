@@ -64,24 +64,24 @@ These happen inside `createSimulationFromRow` (and the scene uses the resulting 
 ### Orbital distance (semi-major axis, AU)
 
 - **Primary:** Catalog value `pl_orbsmax` when present and **consistent** with period and star mass (within 0.5×–2× of the Kepler III value).
-- **Fallback:** From orbital period and star mass via **Kepler III**: \(a_{\mathrm{AU}}^3 = T_{\mathrm{yr}}^2 \cdot M_\odot\). Used when the catalog value is missing or outside that range (e.g. archive placeholder 1.0).
+- **Fallback:** From orbital period and star mass via **Kepler III**: *a*³ = *T*² · *M*☉ (with *a* in AU, *T* in years, *M* in solar masses). Used when the catalog value is missing or outside that range (e.g. archive placeholder 1.0).
 
 ### Stellar luminosity (for Goldilocks zone and display)
 
-- **Primary:** \(L/L_\odot = 10^{\mathtt{st\_lum}}\) when `st_lum` (log₁₀ luminosity) is present in the row.
-- **Fallback:** Derived from radius and effective temperature when `st_lum` is missing or invalid: \(L/L_\odot = (R/R_\odot)^2 \cdot (T/T_\odot)^4\) with \(T_\odot = 5778\,\mathrm{K}\). Ensures red dwarfs (e.g. K2-18) get a correct HZ instead of defaulting to solar luminosity.
-- **Last resort:** \(L = 1\) (solar) if neither source is usable.
+- **Primary:** *L*/L☉ = 10<sup>st_lum</sup> when `st_lum` (log₁₀ luminosity) is present in the row.
+- **Fallback:** Derived from radius and effective temperature when `st_lum` is missing or invalid: *L*/L☉ = (*R*/R☉)² · (*T*/T☉)⁴ with T☉ = 5778 K. Ensures red dwarfs (e.g. K2-18) get a correct HZ instead of defaulting to solar luminosity.
+- **Last resort:** *L* = 1 (solar) if neither source is usable.
 
 ### Goldilocks zone (habitable zone, AU)
 
-- **Formula:** Flux \(\propto L/d^2\) ⇒ distance \(\propto \sqrt{L}\). Inner and outer bounds use the **resolved luminosity** (above):
-  - Inner: \(0.75 \sqrt{L}\)
-  - Outer: \(1.77 \sqrt{L}\)
+- **Formula:** Flux ∝ *L*/*d*² ⇒ distance ∝ √*L*. Inner and outer bounds use the **resolved luminosity** (above):
+  - Inner: 0.75√*L*
+  - Outer: 1.77√*L*
 - **In/out check:** Planet semi-major axis vs these bounds → “in”, “too close”, or “too far”. No climate or atmosphere model; luminosity-only.
 
 ### Orbit animation
 
-- **Kepler II:** Equal areas in equal times → angular speed \(\propto 1/r^2\) (with current \(r\) and eccentricity). Elliptical orbit is drawn from precomputed points; the planet position is advanced using this relation so it speeds up near the star.
+- **Kepler II:** Equal areas in equal times → angular speed ∝ 1/*r*² (with current *r* and eccentricity). Elliptical orbit is drawn from precomputed points; the planet position is advanced using this relation so it speeds up near the star.
 
 ### Scale and reference in the scene
 
